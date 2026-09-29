@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: If you use this code, cite the lasso library it ports.
+title: lasso, the pointing cone's snap and redirect, as a sandbox guest
+abstract: >-
+  LassoPoint and LassoDB from V-Sekai/lasso at bfa290d (carried in
+  godot-fabric as modules/lasso, 469 lines, MIT; LICENSE here is its
+  licence), ported onto godot-lite for lasso.elf (RFD 2287 step 2). Local
+  adaptations: a target is a LassoTarget, which carries the transform and
+  visibility a Node3D has in the engine, so the shared godot-lite Node3D
+  is unchanged; ERR_FAIL_NULL becomes ERR_FAIL_COND; a count of live
+  LassoPoints for the leak check; the engine-registration header and the
+  profane comment are dropped. The redirect is corrected in two places:
+  it maps a candidate into the view with Basis::xform_inv rather than
+  xform (the three-vector Basis constructor fills columns, so xform went
+  from view to world, wrong for any turned view), and it measures the
+  distance along the joystick to the bisector as |P|^2 / (2 d.P) in place
+  of a three-branch line intersection whose general branch used the
+  wrong intercept ((1 - a1) px / 2 for py / 2 - a1 px / 2). The two
+  special branches it replaces already computed that value. The module's
+  own redirect fails checks.cpp's redirect_sides: 0/2/4/0/0 where
+  1/2/3/4/0 is right.
+type: software
+authors:
+  - name: K. S. Ernest (iFire) Lee
+  - name: V-Sekai
+  - name: MMMaellon
+repository-code: https://github.com/V-Sekai/lasso
+commit: bfa290d24b45fae637dba1971cc2159bd1c9b493
+license: MIT
