@@ -1,0 +1,7 @@
+PASS nearest_axis: targets at 2 m, 20/5/12 deg off the axis: first 1 second 2 (scores 3.42701 1.07722); control, the first two swapped: first 0 second 2
+PASS nearer_wins: two targets 8 deg off the axis at 3 m and 1 m: first 1; control, distances swapped: first 0
+PASS snap_lock: target 0 held and locked: first 0 second -1; control, lock off: first 1
+PASS hidden: the nearer target hidden: first 0 second -1; control, shown: first 1
+PASS redirect_sides: in a turned view, joystick right/left/up/down/at rest pick 1/2/3/4/0 (want 1/2/3/4/0); control, the view rolled a quarter turn: 3/4/2/1/0 (want 3/4/2/1/0)
+PASS no_leak: LassoPoints alive before 0, after 200 calls 0; control, a point dropped without unregistering: 1 alive (want 1), 0 once unregistered
+PASS bad_input: a ragged target array, an 11-value source and an out-of-range snapped index are refused; control, one well-formed target: first 0

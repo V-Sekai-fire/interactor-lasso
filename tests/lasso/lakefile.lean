@@ -21,8 +21,10 @@ def cppUnder (dir : FilePath) : IO (Array FilePath) := do
 -- for the guest, plus the shim.
 extern_lib lasso_ffi pkg := do
   let root := pkg.dir / ".." / ".."
-  let gdl := root / "guest" / "godot_lite"
-  let core := root / "vendor" / "godot-core-subset"
+  -- The godot-lite shim is contract-guest-runtime's, a sibling checkout in the manifest layout.
+  let runtime := root / ".." / ".." / "2-contract" / "guest-runtime"
+  let gdl := runtime / "guest" / "godot_lite"
+  let core := runtime / "vendor" / "godot-core-subset"
   let lasso := root / "guest" / "lasso"
   let flags := #["-std=c++17", "-O2", "-fPIC", "-ffp-contract=off", "-Werror=absolute-value", "-w",
     "-I", gdl.toString, "-I", core.toString, "-I", lasso.toString, "-include", (gdl / "gdl_prelude.h").toString]

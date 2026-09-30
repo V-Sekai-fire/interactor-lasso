@@ -1,0 +1,44 @@
+# The lasso's Lean tests: the guest's C++ linked natively through the FFI
+# shim, checked against tests/lasso/native-checks.txt.
+name: lean-tests
+
+on:
+  push:
+    branches: [main/main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  # The goal manifest's branch; every project in it names its own revision.
+  MANIFEST_BRANCH: main/main
+
+jobs:
+  lean-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: weft/3-interactor/lasso
+      - name: clang, elan and repo
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q clang
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          mkdir -p "$HOME/bin"
+          curl -fsSL https://storage.googleapis.com/git-repo-downloads/repo -o "$HOME/bin/repo" && chmod +x "$HOME/bin/repo"
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+      - name: The godot-lite shim, from the goal manifest
+        working-directory: weft
+        run: |
+          git config --global user.name "lean-tests CI"
+          git config --global user.email "lean-tests-ci@users.noreply.github.com"
+          repo init -q -u https://github.com/V-Sekai-fire/contract-manifest-taskweft -b "$MANIFEST_BRANCH" --depth=1 --no-clone-bundle
+          repo sync -q -c --no-tags contract-guest-runtime
+      - name: Build and run the lasso tests
+        working-directory: weft/3-interactor/lasso/tests/lasso
+        run: |
+          lake build
+          lake exe tests --write="$RUNNER_TEMP/native-checks.txt"
+          diff "$RUNNER_TEMP/native-checks.txt" native-checks.txt
