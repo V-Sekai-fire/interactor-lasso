@@ -12,6 +12,10 @@ env:
   # The goal manifest's branch; every project in it names its own revision.
   MANIFEST_BRANCH: main/main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   lean-tests:
     runs-on: ubuntu-24.04
