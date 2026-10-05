@@ -4,13 +4,13 @@ name: lean-tests
 
 on:
   push:
-    branches: [main/main]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
 env:
   # The goal manifest's branch; every project in it names its own revision.
-  MANIFEST_BRANCH: main/main
+  MANIFEST_BRANCH: main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
