@@ -8,9 +8,9 @@ package LassoTests where
 -- Every dependency is pinned in a V-Sekai-fire repo or fork (AGENTS.md rule 1); plausible first,
 -- so the witness search does not bring in another copy.
 require plausible from git
-  "https://github.com/V-Sekai-fire/plausible" @ "v4.30.0"
+  "https://github.com/V-Sekai-fire/plausible" @ "v4.34.0"
 require «plausible-witness-dag» from git
-  "https://github.com/V-Sekai-fire/plausible-witness-dag" @ "160b94c9c6eed3bb9ebffce919fc6f989dcafba8"
+  "https://github.com/V-Sekai-fire/plausible-witness-dag" @ "f18818941e8914b110f85ec330889a4785c01bf1"
 
 /-- Every `.cpp` under `dir`, sorted, so the object names do not depend on the walk order. -/
 def cppUnder (dir : FilePath) : IO (Array FilePath) := do
