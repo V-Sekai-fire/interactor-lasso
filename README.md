@@ -15,4 +15,4 @@ From `tests/lasso`, with `contract-guest-runtime` checked out at its goal-manife
 
 ## Licence
 
-MIT. See [guest/lasso/LICENSE](guest/lasso/LICENSE).
+MIT. See [LICENSE](LICENSE).
