@@ -4,7 +4,7 @@ title: lasso, the pointing cone's snap and redirect, as a sandbox guest
 abstract: >-
   LassoPoint and LassoDB from V-Sekai/lasso at bfa290d (carried in
   godot-fabric as modules/lasso, 469 lines, MIT; LICENSE here is its
-  licence), ported onto godot-lite for lasso.elf (RFD 2287 step 2). Local
+  licence), ported onto godot-lite for lasso.elf (RFD66606-2287 step 2). Local
   adaptations: a target is a LassoTarget, which carries the transform and
   visibility a Node3D has in the engine, so the shared godot-lite Node3D
   is unchanged; ERR_FAIL_NULL becomes ERR_FAIL_COND; a count of live
