@@ -1,4 +1,4 @@
-# lasso.elf (RFD 2287 step 2): the lasso's snapping math, guest/lasso, on godot-lite.
+# lasso.elf (RFD66606-2287 step 2): the lasso's snapping math, guest/lasso, on godot-lite.
 # lasso_core is the same library tests/lasso links natively through its Lean FFI shim.
 # With the curvenet stage off, the shim is not compiled strict there, so the lasso asks for no
 # contraction itself: the guest must round as tests/lasso does.
